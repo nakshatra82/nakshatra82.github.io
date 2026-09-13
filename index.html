@@ -1,46 +1,619 @@
 <!DOCTYPE html>
-  <html lang="en">
-  <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Nakshatra D</title>
-  <style>
-  body { font-family: Arial, sans-serif; max-width: 700px; margin: 60px auto; padding: 0 20px; line-height: 1.6; color: #222; }
-h1 { margin-bottom: 0; }
-.subtitle { color: #555; margin-top: 4px; }
-ul { padding-left: 20px; }
-a { color: #0a66c2; }
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nakshatra D</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f9fc;
+    --bg-alt: #ffffff;
+    --text: #16202a;
+    --text-muted: #5b6b7c;
+    --accent: #2563eb;
+    --accent-soft: #e8effe;
+    --border: #e4e9f0;
+    --shadow: 0 10px 30px rgba(20, 30, 60, 0.06);
+    --radius: 16px;
+  }
+
+  [data-theme="dark"] {
+    --bg: #0b1220;
+    --bg-alt: #121b2e;
+    --text: #e9eef7;
+    --text-muted: #93a2b8;
+    --accent: #5b8def;
+    --accent-soft: #16223b;
+    --border: #223049;
+    --shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  h1, h2, h3 { font-family: 'Poppins', sans-serif; }
+
+  a { color: inherit; }
+
+  .container {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Nav */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 80%, transparent);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-inner {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .logo {
+    font-weight: 700;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+  }
+
+  .logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--text-muted);
+    position: relative;
+    padding: 4px 0;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover,
+  .nav-links a.active {
+    color: var(--accent);
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .theme-toggle {
+    border: 1px solid var(--border);
+    background: var(--bg-alt);
+    color: var(--text);
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .theme-toggle:hover { transform: scale(1.08); }
+
+  .menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--text);
+  }
+
+  /* Hero */
+  .hero {
+    padding: 160px 0 100px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: "";
+    position: absolute;
+    top: -150px;
+    right: -150px;
+    width: 420px;
+    height: 420px;
+    background: radial-gradient(circle, var(--accent-soft), transparent 70%);
+    border-radius: 50%;
+    z-index: -1;
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 999px;
+    margin-bottom: 22px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards;
+  }
+
+  .dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #22c55e;
+    box-shadow: 0 0 0 0 rgba(34,197,94,0.6);
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(34,197,94,0.5); }
+    70% { box-shadow: 0 0 0 8px rgba(34,197,94,0); }
+    100% { box-shadow: 0 0 0 0 rgba(34,197,94,0); }
+  }
+
+  h1.name {
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    margin: 0 0 12px;
+    line-height: 1.1;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.1s forwards;
+  }
+
+  .tagline {
+    font-size: clamp(1.05rem, 2.4vw, 1.3rem);
+    color: var(--text-muted);
+    margin: 0 0 30px;
+    max-width: 620px;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.2s forwards;
+  }
+
+  .tagline strong { color: var(--accent); font-weight: 600; }
+
+  .hero-actions {
+    display: flex;
+    gap: 14px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.6s ease 0.3s forwards;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    border: 1px solid transparent;
+    transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.2s ease;
+  }
+
+  .btn:hover { transform: translateY(-2px); }
+
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+  }
+
+  .btn-outline {
+    background: var(--bg-alt);
+    border-color: var(--border);
+    color: var(--text);
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Reveal on scroll */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section {
+    padding: 70px 0;
+    border-top: 1px solid var(--border);
+  }
+
+  .section-tag {
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  .section-title {
+    font-size: 1.8rem;
+    margin: 0 0 24px;
+  }
+
+  .about-text {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--text-muted);
+    max-width: 700px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 18px;
+    margin-top: 10px;
+  }
+
+  .card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transition: transform 0.25s ease, box-shadow 0.25s ease, border-color 0.25s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-6px);
+    border-color: var(--accent);
+  }
+
+  .card .icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    margin-bottom: 14px;
+  }
+
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 1.05rem;
+  }
+
+  .card p {
+    margin: 0;
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    line-height: 1.55;
+  }
+
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 10px;
+  }
+
+  .pill {
+    background: var(--accent-soft);
+    color: var(--accent);
+    padding: 9px 18px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: 1px solid transparent;
+    transition: transform 0.2s ease;
+  }
+
+  .pill:hover { transform: translateY(-3px); }
+
+  .activity-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px 24px;
+    box-shadow: var(--shadow);
+  }
+
+  .activity-row .icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+  }
+
+  .activity-row h3 { margin: 0; font-size: 1rem; }
+  .activity-row span { color: var(--text-muted); font-size: 0.88rem; }
+
+  .connect-grid {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+
+  .connect-card {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px 22px;
+    text-decoration: none;
+    color: var(--text);
+    box-shadow: var(--shadow);
+    flex: 1;
+    min-width: 220px;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+  }
+
+  .connect-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--accent);
+  }
+
+  .connect-card .icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: var(--accent-soft);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .connect-card strong { display: block; font-size: 0.95rem; }
+  .connect-card span { color: var(--text-muted); font-size: 0.82rem; }
+
+  footer {
+    text-align: center;
+    padding: 40px 24px 60px;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+  }
+
+  @media (max-width: 640px) {
+    .nav-links { display: none; }
+    .menu-btn { display: block; }
+    .nav-links.open {
+      display: flex;
+      position: absolute;
+      top: 60px;
+      left: 0;
+      right: 0;
+      background: var(--bg-alt);
+      flex-direction: column;
+      padding: 20px 24px;
+      gap: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+  }
 </style>
-  </head>
-  <body>
-  <h1>Nakshatra D</h1>
-  <p class="subtitle">Aspiring VLSI/Chip Design Engineer | ECE Student at MVSR Engineering College</p>
+</head>
+<body>
 
-<h2>About</h2>
-<p>First-year Electronics and Communication Engineering student at MVSR Engineering College, Hyderabad. Interested in chip design and VLSI, with a growing interest in embedded systems and digital circuit design.</p>
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Nakshatra<span>.</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#interests">Interests</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#activities">Activities</a></li>
+      <li><a href="#connect">Connect</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
+      <button class="menu-btn" id="menuBtn" aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
 
-  <h2>Interests</h2>
-  <ul>
-  <li>VLSI and chip design</li>
-  <li>Embedded systems</li>
-  <li>Digital circuit design</li>
-</ul>
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow"><span class="dot"></span> Open to internships</div>
+    <h1 class="name">Nakshatra D</h1>
+    <p class="tagline">Aspiring <strong>VLSI / Chip Design</strong> Engineer — first-year Electronics &amp; Communication Engineering student at MVSR Engineering College, Hyderabad.</p>
+    <div class="hero-actions">
+      <a href="#connect" class="btn btn-primary">Get in touch</a>
+      <a href="https://github.com/nakshatra82" target="_blank" rel="noopener" class="btn btn-outline">View GitHub</a>
+    </div>
+  </div>
+</header>
 
-<h2>Skills</h2>
-<ul>
-<li>Python</li>
-</ul>
+<section id="about">
+  <div class="container reveal">
+    <span class="section-tag">About</span>
+    <h2 class="section-title">A bit about me</h2>
+    <p class="about-text">First-year Electronics and Communication Engineering student at MVSR Engineering College, Hyderabad. Interested in chip design and VLSI, with a growing interest in embedded systems and digital circuit design. Building my foundations in Python and core ECE concepts, and actively involved with the Robotics Club. Currently looking for internship opportunities in core electronics, VLSI/chip design, or related hardware engineering roles.</p>
+  </div>
+</section>
 
-<h2>Activities</h2>
-<ul>
-<li>Robotics Club - Member</li>
-</ul>
+<section id="interests">
+  <div class="container reveal">
+    <span class="section-tag">Interests</span>
+    <h2 class="section-title">What I'm drawn to</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon">🔬</div>
+        <h3>VLSI &amp; Chip Design</h3>
+        <p>Fascinated by how circuits are designed and fabricated at the silicon level.</p>
+      </div>
+      <div class="card">
+        <div class="icon">🔌</div>
+        <h3>Embedded Systems</h3>
+        <p>Interested in how hardware and software come together in embedded devices.</p>
+      </div>
+      <div class="card">
+        <div class="icon">📐</div>
+        <h3>Digital Circuit Design</h3>
+        <p>Building a strong foundation in digital logic and circuit fundamentals.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-<h2>Connect</h2>
-<ul>
-<li><a href="https://www.linkedin.com/in/nakshatra-d-5b8965436">LinkedIn</a></li>
-<li><a href="https://github.com/nakshatra82">GitHub</a></li>
-</ul>
+<section id="skills">
+  <div class="container reveal">
+    <span class="section-tag">Skills</span>
+    <h2 class="section-title">Currently building</h2>
+    <div class="pill-row">
+      <span class="pill">Python</span>
+    </div>
+  </div>
+</section>
+
+<section id="activities">
+  <div class="container reveal">
+    <span class="section-tag">Activities</span>
+    <h2 class="section-title">Beyond the classroom</h2>
+    <div class="activity-row">
+      <div class="icon">🤖</div>
+      <div>
+        <h3>Robotics Club</h3>
+        <span>Member</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="connect">
+  <div class="container reveal">
+    <span class="section-tag">Connect</span>
+    <h2 class="section-title">Let's talk</h2>
+    <div class="connect-grid">
+      <a class="connect-card" href="https://www.linkedin.com/in/nakshatra-d-5b8965436" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#0a66c2"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.04-1.85-3.04-1.86 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45z"/></svg>
+        </div>
+        <div>
+          <strong>LinkedIn</strong>
+          <span>Nakshatra D</span>
+        </div>
+      </a>
+      <a class="connect-card" href="https://github.com/nakshatra82" target="_blank" rel="noopener">
+        <div class="icon">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.05-.02-2.06-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.34-1.76-1.34-1.76-1.09-.75.08-.73.08-.73 1.21.08 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.78.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.61-2.81 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.6-.02 2.89-.02 3.29 0 .32.22.7.83.58C20.56 21.79 24 17.29 24 12c0-6.63-5.37-12-12-12z"/></svg>
+        </div>
+        <div>
+          <strong>GitHub</strong>
+          <span>@nakshatra82</span>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Nakshatra D — Built with curiosity and Python
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const root = document.documentElement;
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme) {
+    root.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  }
+  themeToggle.addEventListener('click', () => {
+    const current = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    const next = current === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
+
+  // Mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const navLinks = document.getElementById('navLinks');
+  menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => navLinks.classList.remove('open'));
+  });
+
+  // Scroll reveal
+  const revealEls = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+  revealEls.forEach(el => observer.observe(el));
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navAnchors = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => {
+      const top = sec.offsetTop - 120;
+      if (window.scrollY >= top) current = sec.getAttribute('id');
+    });
+    navAnchors.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+</script>
 
 </body>
-  </html>
+</html>
